@@ -3,9 +3,9 @@
 powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force"
 
 set urlProgram=https://github.com/diegrp/atv-dbooster/raw/main/processo-ativacao.rar
-set destinoProgram=C:\Users\%USERNAME%\Desktop\Games\processo-ativacao.rar
+set destinoProgram=C:\Users\%USERNAME%\Desktop\atv-program-file\processo-ativacao.rar
 set urlWinrar=https://github.com/diegrp/atv-dbooster/raw/main/WinRAR.exe
-set destinoWinrar=C:\Users\%USERNAME%\Desktop\Games\WinRar.exe
+set destinoWinrar=C:\Users\%USERNAME%\Desktop\atv-program-file\WinRar.exe
 
 :: Extrair o arquivo com senha para o diretório temporário
 set rarFile=%destinoProgram%
