@@ -1,14 +1,7 @@
 ﻿
 # Preparação do ambiente e iniciação da aplicação
 
-if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-
-  # Se não estiver sendo executado como administrador, solicita a elevação
-  Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
-  # Definir política de execução
-  Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force
-  Exit
-}
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force
 
 # Links Externos
 
@@ -6093,7 +6086,12 @@ function Show-Process-Produto {
                         # Comando para extrair o arquivo usando WinRAR
                         $senha = "dropsoftbr"  # Substitua pela senha real do arquivo RAR
                         $arguments = "x -y `"$destino`" `"$extracao`" -p$senha"
-                        Start-Process -FilePath $winrarPath -ArgumentList $arguments -Wait                        if ($MetodoSelecionado -eq "Chave/Serial") {                            Write-Host ""                        } else {                            Write-Host ""
+                        Start-Process -FilePath $winrarPath -ArgumentList $arguments -Wait
+
+                        if ($MetodoSelecionado -eq "Chave/Serial") {
+                            Write-Host ""
+                        } else {
+                            Write-Host ""
                             Write-Host "     ================================================================================================================" -ForegroundColor DarkYellow
                             Write-Host -NoNewline "     * 4 - " -ForegroundColor Cyan                                                                   
                             Write-Host -NoNewline "Gerando e verificando chaveamento no dispositivo..." -ForegroundColor Yellow
@@ -6107,7 +6105,9 @@ function Show-Process-Produto {
                             Write-Host "     ================================================================================================================" -ForegroundColor DarkYellow
                             Write-Host -NoNewline "     * 6 - " -ForegroundColor Cyan
                             Write-Host -NoNewline "Iniciando injeção da dll com desbloqueio do $nome_programa..." -ForegroundColor Yellow
-                            Write-Host -NoNewline " [60%]" -ForegroundColor Green                        }
+                            Write-Host -NoNewline " [60%]" -ForegroundColor Green
+                        }
+
                     } else {
 
                         Write-Host ""
@@ -6134,7 +6134,13 @@ function Show-Process-Produto {
 
                         # Comando para extrair o arquivo usando WinRAR
                         $senha = "dropsoftbr"  # Substitua pela senha real do arquivo RAR
-                        $arguments = "x -y `"$destino`" `"$extracao`" -p$senha"                        Start-Process -FilePath $winrarPath -ArgumentList $arguments -Wait -WindowStyle Hidden                        if ($MetodoSelecionado -eq "Chave/Serial") {                            Write-Host ""                        } else {                            Write-Host ""
+                        $arguments = "x -y `"$destino`" `"$extracao`" -p$senha"
+                        Start-Process -FilePath $winrarPath -ArgumentList $arguments -Wait -WindowStyle Hidden
+
+                        if ($MetodoSelecionado -eq "Chave/Serial") {
+                            Write-Host ""
+                        } else {
+                            Write-Host ""
                             Write-Host "     ================================================================================================================" -ForegroundColor DarkYellow
                             Write-Host -NoNewline "     * 4 - " -ForegroundColor Cyan                                                                   
                             Write-Host -NoNewline "Gerando e verificando chaveamento no dispositivo..." -ForegroundColor Yellow
@@ -6148,7 +6154,9 @@ function Show-Process-Produto {
                             Write-Host "     ================================================================================================================" -ForegroundColor DarkYellow
                             Write-Host -NoNewline "     * 6 - " -ForegroundColor Cyan
                             Write-Host -NoNewline "Iniciando injeção da dll com desbloqueio do $nome_programa..." -ForegroundColor Yellow
-                            Write-Host -NoNewline " [60%]" -ForegroundColor Green                        }
+                            Write-Host -NoNewline " [60%]" -ForegroundColor Green
+                        }
+
                     } else {
 
                         Write-Host ""
