@@ -1,5 +1,7 @@
 # Preparação do ambiente e iniciação da aplicação
 
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force
+
 # Links Externos
 
 function Get-Todos-Usuarios {
